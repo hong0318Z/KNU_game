@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>충남 디지털 콘텐츠 창업 지원 사업 | 성과 홍보</title>
+
+    <!-- 파비콘 설정 -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <!-- 파비콘 파일을 프로젝트 루트에 추가하세요 -->
+
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -152,12 +160,54 @@
                 <!-- 지스타 2025 -->
                 <div class="achievement-card">
                     <div class="achievement-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-gamepad"></i>
-                            <p>지스타 2025 참여 사진</p>
-                            <span>이미지를 업로드하세요</span>
+                        <div class="slideshow" data-slideshow="gstar">
+                            <div class="slideshow-container">
+                                <!-- 슬라이드 1 (플레이스홀더) -->
+                                <div class="slide active">
+                                    <div class="image-placeholder">
+                                        <i class="fas fa-gamepad"></i>
+                                        <p>지스타 2025 사진 1</p>
+                                        <span>이미지를 업로드하세요</span>
+                                    </div>
+                                </div>
+                                <!-- 슬라이드 2 -->
+                                <div class="slide">
+                                    <div class="image-placeholder">
+                                        <i class="fas fa-gamepad"></i>
+                                        <p>지스타 2025 사진 2</p>
+                                        <span>이미지를 업로드하세요</span>
+                                    </div>
+                                </div>
+                                <!-- 슬라이드 3 -->
+                                <div class="slide">
+                                    <div class="image-placeholder">
+                                        <i class="fas fa-gamepad"></i>
+                                        <p>지스타 2025 사진 3</p>
+                                        <span>이미지를 업로드하세요</span>
+                                    </div>
+                                </div>
+                                <!--
+                                실제 이미지 사용 시 아래처럼 교체:
+                                <div class="slide active">
+                                    <img src="images/gstar/gstar1.jpg" alt="지스타 2025 사진 1">
+                                </div>
+                                <div class="slide">
+                                    <img src="images/gstar/gstar2.jpg" alt="지스타 2025 사진 2">
+                                </div>
+                                -->
+                            </div>
+                            <button class="slide-btn prev" onclick="changeSlide('gstar', -1)">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slide-btn next" onclick="changeSlide('gstar', 1)">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <div class="slide-dots">
+                                <span class="dot active" onclick="goToSlide('gstar', 0)"></span>
+                                <span class="dot" onclick="goToSlide('gstar', 1)"></span>
+                                <span class="dot" onclick="goToSlide('gstar', 2)"></span>
+                            </div>
                         </div>
-                        <!-- 실제 이미지 삽입 시: <img src="images/gstar2025.jpg" alt="지스타 2025"> -->
                     </div>
                     <div class="achievement-content">
                         <span class="achievement-badge">게임 전시회</span>
@@ -174,12 +224,45 @@
                 <!-- 글로벌게임챌린지 -->
                 <div class="achievement-card">
                     <div class="achievement-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-globe"></i>
-                            <p>글로벌게임챌린지 참가 사진</p>
-                            <span>이미지를 업로드하세요</span>
+                        <div class="slideshow" data-slideshow="ggc">
+                            <div class="slideshow-container">
+                                <!-- 슬라이드 1 -->
+                                <div class="slide active">
+                                    <div class="image-placeholder">
+                                        <i class="fas fa-globe"></i>
+                                        <p>글로벌게임챌린지 사진 1</p>
+                                        <span>이미지를 업로드하세요</span>
+                                    </div>
+                                </div>
+                                <!-- 슬라이드 2 -->
+                                <div class="slide">
+                                    <div class="image-placeholder">
+                                        <i class="fas fa-globe"></i>
+                                        <p>글로벌게임챌린지 사진 2</p>
+                                        <span>이미지를 업로드하세요</span>
+                                    </div>
+                                </div>
+                                <!-- 슬라이드 3 -->
+                                <div class="slide">
+                                    <div class="image-placeholder">
+                                        <i class="fas fa-globe"></i>
+                                        <p>글로벌게임챌린지 사진 3</p>
+                                        <span>이미지를 업로드하세요</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="slide-btn prev" onclick="changeSlide('ggc', -1)">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slide-btn next" onclick="changeSlide('ggc', 1)">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <div class="slide-dots">
+                                <span class="dot active" onclick="goToSlide('ggc', 0)"></span>
+                                <span class="dot" onclick="goToSlide('ggc', 1)"></span>
+                                <span class="dot" onclick="goToSlide('ggc', 2)"></span>
+                            </div>
                         </div>
-                        <!-- 실제 이미지 삽입 시: <img src="images/ggc2025.jpg" alt="글로벌게임챌린지"> -->
                     </div>
                     <div class="achievement-content">
                         <span class="achievement-badge">글로벌 대회</span>
@@ -196,12 +279,45 @@
                 <!-- 긱스 2025 -->
                 <div class="achievement-card">
                     <div class="achievement-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-code"></i>
-                            <p>긱스 2025 참여 사진</p>
-                            <span>이미지를 업로드하세요</span>
+                        <div class="slideshow" data-slideshow="geeks">
+                            <div class="slideshow-container">
+                                <!-- 슬라이드 1 -->
+                                <div class="slide active">
+                                    <div class="image-placeholder">
+                                        <i class="fas fa-code"></i>
+                                        <p>긱스 2025 사진 1</p>
+                                        <span>이미지를 업로드하세요</span>
+                                    </div>
+                                </div>
+                                <!-- 슬라이드 2 -->
+                                <div class="slide">
+                                    <div class="image-placeholder">
+                                        <i class="fas fa-code"></i>
+                                        <p>긱스 2025 사진 2</p>
+                                        <span>이미지를 업로드하세요</span>
+                                    </div>
+                                </div>
+                                <!-- 슬라이드 3 -->
+                                <div class="slide">
+                                    <div class="image-placeholder">
+                                        <i class="fas fa-code"></i>
+                                        <p>긱스 2025 사진 3</p>
+                                        <span>이미지를 업로드하세요</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="slide-btn prev" onclick="changeSlide('geeks', -1)">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slide-btn next" onclick="changeSlide('geeks', 1)">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <div class="slide-dots">
+                                <span class="dot active" onclick="goToSlide('geeks', 0)"></span>
+                                <span class="dot" onclick="goToSlide('geeks', 1)"></span>
+                                <span class="dot" onclick="goToSlide('geeks', 2)"></span>
+                            </div>
                         </div>
-                        <!-- 실제 이미지 삽입 시: <img src="images/geeks2025.jpg" alt="긱스 2025"> -->
                     </div>
                     <div class="achievement-content">
                         <span class="achievement-badge">개발자 행사</span>

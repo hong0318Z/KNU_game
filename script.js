@@ -105,3 +105,150 @@ window.addEventListener('scroll', () => {
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
+
+// ==========================================
+// 슬라이드쇼 기능
+// ==========================================
+
+// 각 슬라이드쇼의 현재 인덱스 저장
+const slideshowIndices = {};
+
+// 슬라이드쇼 초기화
+function initSlideshows() {
+    const slideshows = document.querySelectorAll('.slideshow');
+    slideshows.forEach(slideshow => {
+        const name = slideshow.dataset.slideshow;
+        slideshowIndices[name] = 0;
+    });
+}
+
+// 슬라이드 변경 함수
+function changeSlide(slideshowName, direction) {
+    const slideshow = document.querySelector(`[data-slideshow="${slideshowName}"]`);
+    if (!slideshow) return;
+
+    const slides = slideshow.querySelectorAll('.slide');
+    const dots = slideshow.querySelectorAll('.dot');
+    const totalSlides = slides.length;
+
+    // 현재 인덱스 업데이트
+    slideshowIndices[slideshowName] += direction;
+
+    // 순환 처리
+    if (slideshowIndices[slideshowName] >= totalSlides) {
+        slideshowIndices[slideshowName] = 0;
+    } else if (slideshowIndices[slideshowName] < 0) {
+        slideshowIndices[slideshowName] = totalSlides - 1;
+    }
+
+    updateSlideshow(slideshowName, slides, dots);
+}
+
+// 특정 슬라이드로 이동
+function goToSlide(slideshowName, index) {
+    const slideshow = document.querySelector(`[data-slideshow="${slideshowName}"]`);
+    if (!slideshow) return;
+
+    const slides = slideshow.querySelectorAll('.slide');
+    const dots = slideshow.querySelectorAll('.dot');
+
+    slideshowIndices[slideshowName] = index;
+    updateSlideshow(slideshowName, slides, dots);
+}
+
+// 슬라이드쇼 UI 업데이트
+function updateSlideshow(slideshowName, slides, dots) {
+    const currentIndex = slideshowIndices[slideshowName];
+
+    // 모든 슬라이드 비활성화
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === currentIndex) {
+            slide.classList.add('active');
+        }
+    });
+
+    // 모든 도트 비활성화
+    dots.forEach((dot, i) => {
+        dot.classList.remove('active');
+        if (i === currentIndex) {
+            dot.classList.add('active');
+        }
+    });
+}
+
+// 자동 슬라이드 기능 (선택 사항)
+function startAutoSlide(slideshowName, interval = 5000) {
+    setInterval(() => {
+        changeSlide(slideshowName, 1);
+    }, interval);
+}
+
+// 터치/스와이프 지원
+function initTouchSupport() {
+    const slideshows = document.querySelectorAll('.slideshow');
+
+    slideshows.forEach(slideshow => {
+        const name = slideshow.dataset.slideshow;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slideshow.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        slideshow.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe(name, touchStartX, touchEndX);
+        }, { passive: true });
+    });
+}
+
+function handleSwipe(slideshowName, startX, endX) {
+    const swipeThreshold = 50;
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // 왼쪽으로 스와이프 -> 다음 슬라이드
+            changeSlide(slideshowName, 1);
+        } else {
+            // 오른쪽으로 스와이프 -> 이전 슬라이드
+            changeSlide(slideshowName, -1);
+        }
+    }
+}
+
+// 키보드 네비게이션 지원
+function initKeyboardSupport() {
+    document.addEventListener('keydown', (e) => {
+        // 현재 뷰포트에 보이는 슬라이드쇼 찾기
+        const slideshows = document.querySelectorAll('.slideshow');
+
+        slideshows.forEach(slideshow => {
+            const rect = slideshow.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+            if (isVisible) {
+                const name = slideshow.dataset.slideshow;
+                if (e.key === 'ArrowLeft') {
+                    changeSlide(name, -1);
+                } else if (e.key === 'ArrowRight') {
+                    changeSlide(name, 1);
+                }
+            }
+        });
+    });
+}
+
+// 슬라이드쇼 초기화 실행
+document.addEventListener('DOMContentLoaded', () => {
+    initSlideshows();
+    initTouchSupport();
+    initKeyboardSupport();
+
+    // 자동 슬라이드 활성화 (원하지 않으면 아래 줄들을 주석 처리)
+    // startAutoSlide('gstar', 5000);
+    // startAutoSlide('ggc', 5000);
+    // startAutoSlide('geeks', 5000);
+});
